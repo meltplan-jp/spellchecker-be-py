@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pyspellchecker
+rapidfuzz
+flashtext
+symspellpy
