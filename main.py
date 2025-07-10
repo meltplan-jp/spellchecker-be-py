@@ -4,6 +4,7 @@ from typing import List, Optional
 from flashtext import KeywordProcessor
 from symspellpy import SymSpell, Verbosity
 import string
+from fastapi.middleware.cors import CORSMiddleware
 
 from typo_list import CBC_TYPO_LIST
 from index_terms import INDEX_TERMS
@@ -11,6 +12,14 @@ from normalization_dict import CBC_NORMALIZATION_DICT
 from protected_words import PROTECTED_WORDS
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],       # Allows specific origins to make requests
+    allow_credentials=True,      # Supports cookies and authorization headers
+    allow_methods=["*"],         # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],         # Allows all headers
+)
 
 # ————— SymSpell setup (constant time corrections) —
 sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
